@@ -1,11 +1,11 @@
 import {useState} from "react";
 import { Typography, InputAdornment, Button, TextField } from "@mui/material";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { locationState } from "../store/atoms/location";
 
 function SearchBar() {
-  const setLocation = useSetRecoilState(locationState);
-  const [location, setLocationState] = useState("");
+  const [location, setLocationState] = useRecoilState(locationState);
+  const [loc, setLoc]=useState("");
   return (
     <div className="flex justify-between">
       <Typography variant="h1" fontSize={"1.6rem"} className="flex justify-between items-center">
@@ -24,7 +24,7 @@ function SearchBar() {
           //     ),
           //   }}
           onChange={(e) => {
-            setLocationState(e.target.value);
+            setLoc(e.target.value);
             console.log(e.target.value);
             // console.log(locationState.location);
             // setClicked(null);
@@ -33,7 +33,7 @@ function SearchBar() {
         <Button
           variant="contained"
           onClick={() => {
-            setLocation(location);
+            setLocationState(loc);
             // setClicked(true);
           }}
         >

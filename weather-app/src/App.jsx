@@ -2,8 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import axios from 'axios'
+import { locationState} from './store/atoms/location'
 import { Coords } from './store/atoms/coords'
-import { city } from './store/selectors/city'
+import { weatherData } from './store/atoms/weatherData'
 import SearchBar from './components/SearchBar'
 import Banner from './components/Banner'
 import {
@@ -16,17 +18,19 @@ import {
 } from 'recoil';
 
 function App() {
-  
+
   return (
     <RecoilRoot>
       <FetchData/>
-      <Init/>
-      <div className="h-screen w-screen bg-[#f8f8ff] py-10 px-14">
+      {/* <Init/> */}
+        <div className="h-screen w-screen bg-[#f8f8ff] py-10 px-14">
         <div className="h-full w-full flex flex-col gap-6">
           <SearchBar />
           <Banner></Banner>
         </div>
       </div>
+      
+      
     </RecoilRoot>
   );
 }
@@ -60,8 +64,26 @@ function Init(){
 }
 
 function FetchData(){
-  const cityState = useRecoilValue(city);
-  return <div>{cityState}</div>
+  const location = useRecoilValue(locationState);
+  const setWeather = useSetRecoilState(weatherData);
+  async function fetch(){
+    try {
+      console.log(location);
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+
+      setWeather(res.data);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  fetch();
+  return <></>
+  
 }
 
 export default App
