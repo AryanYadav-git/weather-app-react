@@ -8,6 +8,7 @@ import { Coords } from './store/atoms/coords'
 import { weatherData } from './store/atoms/weatherData'
 import SearchBar from './components/SearchBar'
 import Banner from './components/Banner'
+import Details from './components/Details'
 import {
   RecoilRoot,
   atom,
@@ -27,6 +28,7 @@ function App() {
         <div className="h-full w-full flex flex-col gap-6">
           <SearchBar />
           <Banner></Banner>
+          <Details></Details>
         </div>
       </div>
       
