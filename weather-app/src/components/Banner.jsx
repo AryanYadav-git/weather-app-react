@@ -34,7 +34,7 @@ function Banner() {
 
   if(weather){
    return (
-      <Card variant='outlined' className="w-full h-72 relative shadow-xl">
+      <Card variant='outlined' className="w-full h-72 relative shadow-lg">
         <CardMedia
           component="img"
           // height="100%"

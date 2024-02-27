@@ -1,14 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import axios from 'axios'
-import { locationState} from './store/atoms/location'
-import { Coords } from './store/atoms/coords'
-import { weatherData } from './store/atoms/weatherData'
-import SearchBar from './components/SearchBar'
-import Banner from './components/Banner'
-import Details from './components/Details'
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import axios from "axios";
+import { locationState } from "./store/atoms/location";
+import { Coords } from "./store/atoms/coords";
+import { weatherData } from "./store/atoms/weatherData";
+import SearchBar from "./components/SearchBar";
+import Banner from "./components/Banner";
+import Details from "./components/Details";
+import { current } from "./store/atoms/current";
+import { forecastData } from "./store/atoms/forecast";
+
 import {
   RecoilRoot,
   atom,
@@ -16,59 +19,81 @@ import {
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
-} from 'recoil';
+} from "recoil";
 
 function App() {
-
   return (
     <RecoilRoot>
-      <FetchData/>
-      {/* <Init/> */}
-        <div className="h-screen w-screen bg-[#f8f8ff] py-10 px-14">
-        <div className="h-full w-full flex flex-col gap-6">
+      <FetchData />
+      <Init />
+      <div className="h-screen w-screen bg-[#f2f2f2] py-10 px-14 ">
+        <div className="h-full w-full flex flex-col gap-6  ">
           <SearchBar />
           <Banner></Banner>
           <Details></Details>
         </div>
       </div>
-      
-      
     </RecoilRoot>
   );
 }
 
-function Init(){
-  const setCoords = useSetRecoilState(Coords);
+function Init() {
+  const currentData = useRecoilValue(current);
+  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState("");
+  const setWeather = useSetRecoilState(weatherData);
+  const setForecastData = useSetRecoilState(forecastData);
+  // const setCoords = useSetRecoilState(Coords);
   const init = async () => {
     const location = await navigator.geolocation.getCurrentPosition(
       (position) => {
-        setCoords({
-          isLoading: false,
-          lon:position.coords.longitude,
-          lat:position.coords.latitude
-        });
-        console.log(position);
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
       },
       (error) => {
         console.log(error);
-        setCoords({
-          isLoading: false,
-          lon:72.8479,
-          lat:19.0144
-        });
-      },
+      }
     );
-  }
-  init();
-  return <div>
-    
-  </div>
+  };
+  const FetchData = async () => {
+    try {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      setWeather(res.data);
+      const forecastRes = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      setForecastData(forecastRes.data.list.slice(0,10));
+      console.log(forecastRes.data.list.slice(0,10));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (current) {
+      init();
+      FetchData();
+    }
+  }, [currentData]);
+
+  return <div></div>;
 }
 
-function FetchData(){
+function FetchData() {
   const location = useRecoilValue(locationState);
+  const setCurrent = useSetRecoilState(current);
   const setWeather = useSetRecoilState(weatherData);
-  async function fetch(){
+  const setForecastData = useSetRecoilState(forecastData);
+  setCurrent(false);
+  async function fetch() {
     try {
       console.log(location);
       const res = await axios.get(
@@ -76,16 +101,24 @@ function FetchData(){
           import.meta.env.VITE_API_KEY
         }`
       );
-
+      // if(res.data.cod=="404"){
+      //   console.log(res.data.message);
+      // }
+      const forecastRes = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
       setWeather(res.data);
-      // console.log(res.data);
+      console.log(res.data);
+      setForecastData(forecastRes.data.list.slice(0,10));
+      console.log(forecastRes.data.list.slice(0,10));
     } catch (error) {
       console.log(error);
     }
   }
   fetch();
-  return <></>
-  
+  return <></>;
 }
 
-export default App
+export default App;

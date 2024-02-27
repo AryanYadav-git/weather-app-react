@@ -1,17 +1,26 @@
 import {useState} from "react";
-import { Typography, InputAdornment, Button, TextField } from "@mui/material";
+import { Typography, InputAdornment, Button, TextField, IconButton } from "@mui/material";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { locationState } from "../store/atoms/location";
+import { current } from "../store/atoms/current";
+import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 
 function SearchBar() {
   const [location, setLocationState] = useRecoilState(locationState);
   const [loc, setLoc]=useState("");
+  const setCurrent = useSetRecoilState(current);
   return (
     <div className="flex justify-between">
       <Typography variant="h1" fontSize={"1.6rem"} className="flex justify-between items-center">
         Weather Application
       </Typography>
       <div className="searchbar flex gap-2">
+        <IconButton variant="contained"
+          onClick={() => {
+            setCurrent(true);
+          }}>
+            <LocationOnTwoToneIcon />
+          </IconButton>
         <TextField
           size="small"
           variant="outlined"

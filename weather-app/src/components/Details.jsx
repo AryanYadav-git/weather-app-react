@@ -8,15 +8,15 @@ import WbTwilightTwoToneIcon from "@mui/icons-material/WbTwilightTwoTone";
 import LightModeTwoToneIcon from "@mui/icons-material/LightModeTwoTone";
 import CycloneTwoToneIcon from "@mui/icons-material/CycloneTwoTone";
 import FilterDramaTwoToneIcon from "@mui/icons-material/FilterDramaTwoTone";
-
+import Forecast from "./Forecast";
 function Details() {
   const weather = useRecoilValue(weatherData);
   if (weather) {
     return (
       <div className="h-72 flex justify-between ">
-        <div className="w-1/3 flex flex-col justify-between">
-          <Card className="h-42 w-full flex p-4" variant="outlined shadow-xl">
-            <div className="w-1/2 flex flex-col justify-evenly">
+        <div className="w-1/3 flex flex-col justify-between ">
+          <Card className="h-42 w-full flex p-4 justify-evenly shadow-xl" variant="outlined ">
+            <div className=" h-40 flex flex-col justify-evenly">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <SpeedTwoToneIcon fontSize="large" />
@@ -45,7 +45,7 @@ function Details() {
               </div>
             </div>
             {/* <Divider orientation="vertical" variant="middle" flexItem /> */}
-            <div className="w-1/2 flex flex-col justify-between">
+            <div className=" flex h-40 flex-col justify-evenly">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <LightModeTwoToneIcon fontSize="large" />
@@ -56,8 +56,7 @@ function Details() {
                   </Typography>
                   <Typography className="flex justify-center items-center font-black">
                     {new Date(weather.sys.sunrise * 1000)
-                      .toTimeString()
-                      .toLocaleString("default", weather.timezone)}
+                      .toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true, minute12: true})}
                   </Typography>
                 </div>
               </div>
@@ -71,15 +70,14 @@ function Details() {
                   </Typography>
                   <Typography className="flex justify-center items-center font-black">
                     {new Date(weather.sys.sunset * 1000)
-                      .toTimeString()
-                      .toLocaleString("default", weather.timezone)}
+                      .toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true, minute12: true})}
                   </Typography>
                 </div>
               </div>
             </div>
           </Card>
-          <Card className="h-20 w-full shadow-xl p-4" variant="outlined">
-            <div className="flex justify-evenly">
+          <Card className="h-20 w-full shadow-xl p-4 " variant="outlined">
+            <div className="flex justify-evenly ">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <FilterDramaTwoToneIcon fontSize="large" />
@@ -109,9 +107,9 @@ function Details() {
             </div>
           </Card>
         </div>
-        <Card className="h-full w-3/5 shadow-xl" variant="outlined">
-          <Card variant="outlined"></Card>
-        </Card>
+        <div className="h-full w-[66%] shadow-xl" >
+          <Forecast/>
+        </div>
       </div>
     );
   }
