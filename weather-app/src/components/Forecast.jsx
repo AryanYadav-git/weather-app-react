@@ -22,6 +22,9 @@ function Forecast() {
                   <Typography variant="body2" color="text.secondary">
                     {item.weather[0].description}
                   </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {item.dt_txt}
+                  </Typography>
                 </div>
               </Card>
             </div>
