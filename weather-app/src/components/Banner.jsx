@@ -38,7 +38,7 @@ function Banner() {
         <CardMedia
           component="img"
           // height="100%"
-          image={`./src/assets/${banner}.jpg`}
+          image={`/${banner}.jpg`}
           alt="Paella dish"
           className="h-full z-0 border-0"
         />
