@@ -7,23 +7,26 @@ function Forecast() {
   const forecast = useRecoilValue(forecastData);
   if (forecast) {
     return (
-      <Card className="h-full flex gap-4 p-4" id="container">
+      <Card className="h-full flex gap-4 p-4"  id="container">
         {forecast.map((item, index) => {
           return (
             <div className="">
               <Card className="h-full w-40" id={index}>
-                <div className="h-full flex-col justify-center items-center">
-                  <Typography variant="h2" color="text.secondary">
+                <div className="h-full flex flex-col justify-center bg-[#cfdaf9] items-center">
+                  <Typography variant="h6" color="text.secondary">
+                    {item.dt_txt.split(" ")[1]}
+                  </Typography>
+                  <br />
+                  <Typography variant="h2" className="align-center" color="text.secondary">
                     {Math.round((item.main.temp - 273) * 1) / 1}&deg;C
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.weather[0].main}
-                  </Typography>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                    alt="image"
+                    className="h-14"
+                  />
                   <Typography variant="body2" color="text.secondary">
                     {item.weather[0].description}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.dt_txt}
                   </Typography>
                 </div>
               </Card>

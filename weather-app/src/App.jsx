@@ -26,7 +26,7 @@ function App() {
     <RecoilRoot>
       <FetchData />
       <Init />
-      <div className="h-screen w-screen bg-[#f2f2f2] py-10 px-14 ">
+      <div className="h-screen w-screen bg-[#f2f2f2] bg-[#cfeafe]  py-10 px-14 ">
         <div className="h-full w-full flex flex-col gap-6  ">
           <SearchBar />
           <Banner></Banner>

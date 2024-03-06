@@ -34,13 +34,13 @@ function Banner() {
 
   if(weather){
    return (
-      <Card variant='outlined' className="w-full h-72 relative shadow-lg">
+      <Card variant='outlined' className="w-full h-72 relative shadow-lg rounded-full">
         <CardMedia
           component="img"
           // height="100%"
           image={`/src/assets/${banner}.jpg`}
           alt="Paella dish"
-          className="h-full z-0 "
+          className="h-full z-0 border-0"
         />
 
         <div className="absolute z-10 top-0 h-full w-full text-white">

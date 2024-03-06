@@ -16,6 +16,7 @@ function SearchBar() {
       </Typography>
       <div className="searchbar flex gap-2">
         <IconButton variant="contained"
+        title="Your location"
           onClick={() => {
             setCurrent(true);
           }}>

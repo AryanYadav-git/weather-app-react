@@ -15,17 +15,17 @@ function Details() {
     return (
       <div className="h-72 flex justify-between ">
         <div className="w-1/3 flex flex-col justify-between ">
-          <Card className="h-42 w-full flex p-4 justify-evenly shadow-xl" variant="outlined ">
+          <Card className="h-42 w-full flex p-4 justify-evenly shadow-xl"  variant="outlined ">
             <div className=" h-40 flex flex-col justify-evenly">
               <div className="flex gap-4">
                 <div className="flex items-center">
                   <SpeedTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center">
                     Pressure
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-[700] " style={{fontWeight:"bold"}}>
                     {weather.main.pressure} hPa
                   </Typography>
                 </div>
@@ -35,10 +35,10 @@ function Details() {
                   <WaterDropTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center">
                     Humidity
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-black" style={{fontWeight:"bold"}}>
                     {weather.main.humidity} %
                   </Typography>
                 </div>
@@ -51,10 +51,10 @@ function Details() {
                   <LightModeTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center">
                     Sunrise
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-black" style={{fontWeight:"bold"}}>
                     {new Date(weather.sys.sunrise * 1000)
                       .toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true, minute12: true})}
                   </Typography>
@@ -65,10 +65,10 @@ function Details() {
                   <WbTwilightTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center">
                     Sunset
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-black" style={{fontWeight:"bold"}}>
                     {new Date(weather.sys.sunset * 1000)
                       .toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: true, minute12: true})}
                   </Typography>
@@ -83,10 +83,10 @@ function Details() {
                   <FilterDramaTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center">
                     Clouds
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-black" style={{fontWeight:"bold"}}>
                     {weather.clouds.all} %
                   </Typography>
                 </div>
@@ -96,10 +96,10 @@ function Details() {
                   <CycloneTwoToneIcon fontSize="large" />
                 </div>
                 <div className="">
-                  <Typography className="text-[#c2c2c2] flex justify-center">
+                  <Typography className="text-[#1b4de4] flex justify-center ">
                     Wind speed
                   </Typography>
-                  <Typography className="flex justify-center items-center font-black">
+                  <Typography className="flex justify-center items-center font-black " style={{fontWeight:"bold"}}>
                     {weather.wind.speed} m/s
                   </Typography>
                 </div>
