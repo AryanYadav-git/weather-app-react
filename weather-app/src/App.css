@@ -1,0 +1,9 @@
+@media only screen and (max-width: 1240px) {
+    /* For mobile phones: */
+    #wholescreen{
+        padding: 0.5rem;
+    }
+    #container{
+        gap: 1rem;
+    }
+  }

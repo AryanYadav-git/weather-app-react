@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import { Card, CardMedia, Typography } from "@mui/material";
 import { weatherData } from "../store/atoms/weatherData";
 import { useRecoilValue } from "recoil";
-
+import "./style.css"
 function Banner() {
   const weather = useRecoilValue(weatherData);
   console.log(weather);
@@ -44,7 +44,7 @@ function Banner() {
         />
 
         <div className="absolute z-10 top-0 h-full w-full text-white">
-          <div className="flex p-4 justify-between h-full">
+          <div className="flex p-4 justify-between h-full" id="">
             <div className="flex h-full items-end">
               <div className="">
                 <div className="flex items-center">
@@ -60,11 +60,11 @@ function Banner() {
                 <Typography variant="h1">
                   {Math.round((weather.main.temp - 273) * 1) / 1}&deg;C
                 </Typography>
-                <Typography variant="h3">{`${weather.name}, ${weather.sys.country}`}</Typography>
+                <Typography id="cityName" variant="h3">{`${weather.name}, ${weather.sys.country}`}</Typography>
               </div>
             </div>
             <div className="flex items-end">
-              <Typography variant="h4">
+              <Typography id="dateTime" variant="h4">
                 {new Date(weather.dt * 1000).toLocaleString(
                   "default",
                   weather.timezone

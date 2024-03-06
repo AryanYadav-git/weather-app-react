@@ -14,9 +14,6 @@ import { forecastData } from "./store/atoms/forecast";
 
 import {
   RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
@@ -26,10 +23,10 @@ function App() {
     <RecoilRoot>
       <FetchData />
       <Init />
-      <div className="h-screen w-screen bg-[#f2f2f2] bg-[#cfeafe]  py-10 px-14 ">
-        <div className="h-full w-full flex flex-col gap-6  ">
+      <div className="h-screen w-screen bg-[#f2f2f2] bg-[#cfeafe]  py-10 px-14" id="wholescreen">
+        <div className="h-full w-full flex flex-col gap-6 " id="container">
           <SearchBar />
-          <Banner></Banner>
+          <Banner />
           <Details></Details>
         </div>
       </div>
