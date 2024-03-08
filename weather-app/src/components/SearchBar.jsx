@@ -36,9 +36,6 @@ function SearchBar() {
           //   }}
           onChange={(e) => {
             setLoc(e.target.value);
-            console.log(e.target.value);
-            // console.log(locationState.location);
-            // setClicked(null);
           }}
         />
         <Button
