@@ -5,9 +5,7 @@ import { useRecoilValue } from "recoil";
 import "./style.css"
 function Banner() {
   const weather = useRecoilValue(weatherData);
-  console.log(weather);
   const [banner, setBanner] = useState("sun");
-
   function setWeatherBanner(){
     if (weather) {
       const ic = weather.weather[0].id ;

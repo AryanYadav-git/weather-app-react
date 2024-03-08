@@ -44,8 +44,6 @@ function Init() {
   const init = async () => {
     const location = await navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log(position.coords.latitude);
-        console.log(position.coords.longitude);
         setLat(position.coords.latitude);
         setLon(position.coords.longitude);
       },
@@ -68,7 +66,6 @@ function Init() {
         }`
       );
       setForecastData(forecastRes.data.list.slice(0,10));
-      console.log(forecastRes.data.list.slice(0,10));
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +89,6 @@ function FetchData() {
   setCurrent(false);
   async function fetch() {
     try {
-      console.log(location);
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${
           import.meta.env.VITE_API_KEY
@@ -107,9 +103,7 @@ function FetchData() {
         }`
       );
       setWeather(res.data);
-      console.log(res.data);
       setForecastData(forecastRes.data.list.slice(0,10));
-      console.log(forecastRes.data.list.slice(0,10));
     } catch (error) {
       console.log(error);
     }
